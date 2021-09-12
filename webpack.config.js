@@ -30,7 +30,7 @@ module.exports = (env, argv) => {
 
   const config = {
     mode,
-    entry: "./src/index.tsx",
+    entry: "./src/index.ts",
     output: getOutputConfig(mode),
     target: "web",
     resolve: {

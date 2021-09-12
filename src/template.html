@@ -13,7 +13,39 @@
 </head>
 
 <body>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
 
+    .block {
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: blue;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .container {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    canvas {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background-color: aliceblue;
+      border: 1px solid;
+      z-index: 1001;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+  <div id="root"></div>
+  <canvas id="canvas"></canvas>
 </body>
 
 </html>
