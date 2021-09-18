@@ -15,12 +15,19 @@ class Block {
   width: number;
   height: number;
   color: string;
-  constructor(x: number, y: number, width: number, height: number, id: number) {
+  constructor(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    color: string,
+    id: number
+  ) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.color = "blue";
+    this.color = color;
     this.id = id;
   }
 
@@ -82,7 +89,14 @@ class CanvasDraw {
     }
   }
 
-  drawBlock(x: number, y: number, width: number, height: number, id: number) {
+  drawBlock(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    color: string,
+    id: number
+  ) {
     // this.ctx?.fillRect(x, y, 50, 50);
     if (this.ctx && this.scale) {
       const { scaleX, scaleY } = this.scale;
@@ -92,19 +106,24 @@ class CanvasDraw {
         y / scaleY,
         width / scaleX,
         height / scaleY,
+        color,
         id
       );
       this.blocks.push(block);
       // block.draw(id);
+      this.ctx.fillStyle = block.color;
       this.ctx.fillRect(block.x, block.y, block.width, block.height);
-      console.log(block);
+      // console.log(block);
       console.log(this.blocks);
     }
   }
 
   drawBlocks() {
     for (let block of this.blocks) {
-      this.ctx?.fillRect(block.x, block.y, block.width, block.height);
+      if (this.ctx) {
+        this.ctx.fillStyle = block.color;
+        this.ctx?.fillRect(block.x, block.y, block.width, block.height);
+      }
     }
   }
 

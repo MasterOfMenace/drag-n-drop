@@ -1,5 +1,6 @@
 export default function drag(node: HTMLElement) {
   return function onMouseDown(evt: MouseEvent) {
+    console.log("added drag");
     function moveUnderCursor(pageX: number, pageY: number) {
       node.style.left = pageX - node.offsetWidth / 2 + "px";
       node.style.top = pageY - node.offsetHeight / 2 + "px";
@@ -10,6 +11,8 @@ export default function drag(node: HTMLElement) {
     }
 
     function remove() {
+      console.log("removed");
+
       document.removeEventListener("mousemove", onMouseMove);
       node.onmouseup = null;
     }
