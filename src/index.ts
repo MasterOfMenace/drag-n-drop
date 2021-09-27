@@ -15,32 +15,6 @@ const createCounter = () => {
 
 const createId = createCounter();
 
-// function moveBlockOnMap(id: number, block: HTMLElement) {
-//   return function () {
-//     const onBlockMove = () => {
-//       console.log("added onBlockMove");
-
-//       function onMouseMove(evt: MouseEvent) {
-//         canvas.moveBlock(
-//           evt.pageX - block.clientWidth / 2,
-//           evt.pageY - block.clientHeight / 2,
-//           id
-//         );
-//       }
-
-//       function remove() {
-//         block.removeEventListener("mousemove", onMouseMove);
-//         block.onmouseup = null;
-//       }
-
-//       block.addEventListener("mousemove", onMouseMove);
-//       block.addEventListener("mouseup", remove);
-//     };
-//     block.addEventListener("mousedown", drag(block));
-//     block.addEventListener("mousedown", onBlockMove);
-//   };
-// }
-
 function moveBlockOnMap(id: number, block: HTMLElement) {
   console.log("added onBlockMove");
   function onBlockMove() {
@@ -77,11 +51,15 @@ function dragToCreateHandler(node: HTMLElement) {
 
     function onMouseMove(event: MouseEvent) {
       moveUnderCursor(event.pageX, event.pageY);
+
+      copy.hidden = true;
+      let elementBelow = document.elementFromPoint(event.pageX, event.pageY);
+      console.log(elementBelow);
+      copy.hidden = false;
     }
 
     function appendToBlock() {
       console.log("appended");
-      // console.log(evt);
 
       document.removeEventListener("mousemove", onMouseMove);
       const container = document.querySelector(".container");
@@ -102,7 +80,6 @@ function dragToCreateHandler(node: HTMLElement) {
         id
       );
       moveBlockOnMap(id, copy);
-      // copy.addEventListener("mousedown", drag(copy));
       copy.removeEventListener("mouseup", appendToBlock);
       // copy.onmouseup = null;
     }
@@ -119,47 +96,6 @@ function dragToCreateHandler(node: HTMLElement) {
     copy.addEventListener("mouseup", appendToBlock);
   };
 }
-
-// const dragToCreateHandler = (evt) => {
-//   const copy = evt.target.cloneNode(true);
-//   console.log(copy);
-//   document.body.append(copy);
-//   const blockStore = document.querySelector(".blocks-store");
-//   blockStore?.append(copy);
-
-//   copy.addEventListener("mousemove", drag(copy));
-// };
-
-// const onButtonClickHandler = () => {
-//   const block = createBlock("div", "block", "I am a block");
-//   const container = document.querySelector(".container");
-//   container?.appendChild(block);
-//   const id = createId();
-//   const blockX = block.offsetLeft;
-//   const blockY = block.offsetTop;
-
-//   canvas.drawBlock(blockX, blockY, block.clientWidth, block.clientHeight, id);
-
-//   const onBlockMove = () => {
-//     function onMouseMove(evt: MouseEvent) {
-//       canvas.moveBlock(
-//         evt.pageX - block.clientWidth / 2,
-//         evt.pageY - block.clientHeight / 2,
-//         id
-//       );
-//     }
-
-//     function remove() {
-//       block.removeEventListener("mousemove", onMouseMove);
-//       block.onmouseup = null;
-//     }
-
-//     block.addEventListener("mousemove", onMouseMove);
-//     block.addEventListener("mouseup", remove);
-//   };
-//   block.addEventListener("mousedown", drag(block));
-//   block.addEventListener("mousedown", onBlockMove);
-// };
 
 function app() {
   console.log("hello world");
@@ -194,7 +130,6 @@ function app() {
     dragToCreateHandler(draggableBlock2)
   );
 
-  // const container = document.querySelector(".container");
   blocksStore?.appendChild(draggableBlock);
   blocksStore?.appendChild(draggableBlock2);
 }

@@ -1,13 +1,3 @@
-// interface Block {
-// id: number;
-// x: number;
-// y: number;
-// width: number;
-// height: number;
-// color: string;
-// ctx: CanvasRenderingContext2D;
-// }
-
 class Block {
   id: number;
   x: number;
@@ -30,20 +20,7 @@ class Block {
     this.color = color;
     this.id = id;
   }
-
-  // draw(id: number) {
-  //   this.id = id;
-  //   this.ctx.fillRect(this.x, this.y, this.width, this.height);
-  //   this.ctx.fillStyle = this.color;
-  //   this.ctx.fill();
-  // }
 }
-
-// interface CanvasDraw {
-//   canvas: HTMLCanvasElement;
-//   ctx: CanvasRenderingContext2D | null;
-//   blocks: Block[];
-// }
 
 class CanvasDraw {
   canvas: HTMLCanvasElement;
@@ -97,7 +74,6 @@ class CanvasDraw {
     color: string,
     id: number
   ) {
-    // this.ctx?.fillRect(x, y, 50, 50);
     if (this.ctx && this.scale) {
       const { scaleX, scaleY } = this.scale;
       this.ctx?.save();
@@ -110,11 +86,8 @@ class CanvasDraw {
         id
       );
       this.blocks.push(block);
-      // block.draw(id);
       this.ctx.fillStyle = block.color;
       this.ctx.fillRect(block.x, block.y, block.width, block.height);
-      // console.log(block);
-      console.log(this.blocks);
     }
   }
 
@@ -137,18 +110,9 @@ class CanvasDraw {
       this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
       block.x = x / scaleX;
       block.y = y / scaleY;
-      console.log(block);
-      // this.drawBlock(block.x, block.y, id);
-      // this.ctx?.fillRect(block.x, block.y, block.width, block.height);
       this.drawBlocks();
     }
   }
 }
 
 export default CanvasDraw;
-
-// export default function canvasDraw() {
-//   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-//   const ctx = canvas.getContext("2d");
-//   ctx?.fillRect(10, 10, 55, 50);
-// }
